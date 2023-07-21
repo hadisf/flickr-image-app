@@ -1,0 +1,28 @@
+<head>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<div class="flex-center">
+  <input type="text" class="search-input" placeholder="Search images" [(ngModel)]="searchText" (keyup)="search()">
+</div>
+
+<div *ngIf="photos" class="flex-center">
+  <div *ngFor="let photo of photos" class="container image-container"  (click)="openImage(photo)">
+    <img class="thumbnails" [src]="photo.media.m" alt="{{ photo.title }}">
+
+    <div class="text-block">
+      <p class="overflow-text">{{photo.tags}}</p>
+         <p  class="overflow-text"><b>by:</b>{{photo.author}}</p>
+    </div>
+
+  </div>
+</div>
+
+<div class="modal-container" *ngIf="isModalOpen">
+    <div class="modal-content">
+      <span class="close-button" (click)="isModalOpen = false">
+        <i class="fas fa-times"></i>
+      </span>
+      <img src="{{selectedImage.media.m}}" alt="">
+    </div>
+  </div>
